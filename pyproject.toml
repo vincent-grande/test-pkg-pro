@@ -1,0 +1,45 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "test-pkg-pro-extended"
+version = "0.0.1"
+authors = [
+  { name="Vincent P. Grande", email="grande@cs.rwth-aachen.de" },
+]
+description = "TestPkG."
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+  'scikit-learn >= 1.2.0',
+  'numpy >= 1.20.0',
+  'scipy >= 1.10.0'
+]
+
+[project.optional-dependencies]
+test = [
+  'pandas',
+  'pytest-cov',
+  'networkx'
+]
+
+[tool.hatch.build]
+exclude = ["examples", "readme_src"]
+
+[tool.pytest.ini_options]
+addopts = "-ra --cov --cov-report html --cov-report term-missing --cov-fail-under 75"
+testpaths = [
+]
+pythonpath = ["src"]
+
+[tool.coverage.run]
+source = ["src"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/test_pkg_pro_extended"]
